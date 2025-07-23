@@ -34,6 +34,9 @@ while getopts ":f:-file:v:-version:n:-name:" opt; do
       LAYER_NAME="$OPTARG"
       ZIP_FILE="$LAYER_NAME.zip"
       ;;
+    p | -profile
+      PROFILE="$OPTARG"
+      ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
       exit 1
@@ -93,7 +96,7 @@ fi
 
 # Create AWS Lambda layer from the generated ZIP file
 echo "Creating AWS Lambda layer '$LAYER_NAME'..."
-LAYER_RESPONSE=$(aws lambda publish-layer-version --layer-name "$LAYER_NAME" --description "$DESCRIPTION" --zip-file "fileb://$ZIP_FILE" --compatible-runtimes "$RUNTIME" --output json)
+LAYER_RESPONSE=$(aws lambda publish-layer-version --layer-name "$LAYER_NAME" --description "$DESCRIPTION" --zip-file "fileb://$ZIP_FILE" --compatible-runtimes "$RUNTIME" --output json --profile "$PROFILE")
 if [ $? -ne 0 ]; then
   echo "Error: Failed to create AWS Lambda layer." >&2
   exit 1
