@@ -34,7 +34,7 @@ while getopts ":f:-file:v:-version:n:-name:" opt; do
       LAYER_NAME="$OPTARG"
       ZIP_FILE="$LAYER_NAME.zip"
       ;;
-    p | -profile
+    p | -profile)
       PROFILE="$OPTARG"
       ;;
     \?)
