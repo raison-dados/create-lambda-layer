@@ -21,7 +21,7 @@ cleanup() {
 trap cleanup EXIT
 
 # Parse command-line options
-while getopts ":f:-file:v:-version:n:-name:" opt; do
+while getopts ":f:-file:v:-version:n:-name:p:-profile:" opt; do
   case $opt in
     f | -file)
       REQUIREMENTS_FILE="$OPTARG"
